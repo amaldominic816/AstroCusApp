@@ -134,6 +134,7 @@ dependencies:
   flutter_callkit_incoming: ^2.0.4+1
   get_storage: ^2.1.1
   logger: ^2.4.0
+  dot_curved_bottom_nav: ^0.0.2
 
 dev_dependencies:
   flutter_test:
