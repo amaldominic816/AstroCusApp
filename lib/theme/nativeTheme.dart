@@ -64,8 +64,8 @@ ThemeData nativeTheme({bool? darkModeEnabled}) {
         ),
       ),
       fontFamily: 'Poppins',
-      primaryColor: themeController.pickColor,
-      primaryColorLight: themeController.pickColor,
+      primaryColor:   Color(0xFF35093C),
+      primaryColorLight: Color(0xFF7B3F7A),
       iconTheme: IconThemeData(color: Colors.black),
       primaryIconTheme: IconThemeData(color: Colors.black),
       textTheme: TextTheme(

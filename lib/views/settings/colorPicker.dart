@@ -23,7 +23,7 @@ class ColorPickerPage extends StatefulWidget {
 class _ColorPickerPageState extends State<ColorPickerPage>
     with SingleTickerProviderStateMixin {
   List<Color> fullMaterialColors = [
-    Color(0xffef5350), //8A0303
+    Color(0xff110a0a), //8A0303
     Color(0xff3342ae),
     Colors.red,
     Colors.redAccent,

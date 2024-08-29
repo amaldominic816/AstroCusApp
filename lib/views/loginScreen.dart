@@ -56,95 +56,53 @@ class _LoginScreenState extends State<LoginScreen> {
       },
       child: SafeArea(
         child: Scaffold(
-          backgroundColor: Colors.white,
+            backgroundColor: Color(0xFF35093C),
           body: SingleChildScrollView(
             child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
+
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      ClipPath(
-                          clipper: CustomClipPath(),
-                          child: Container(
-                              color: Colors.white,//Get.theme.primaryColor,
-                              width: Get.width,
-                              height: Get.height * 0.21,
-                              child: Center(
-                                  child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    child: Align(
-                                      alignment: Alignment.topRight,
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          Get.find<SearchControllerCustom>()
-                                              .serachTextController
-                                              .clear();
-                                          Get.find<SearchControllerCustom>()
-                                              .searchText = '';
-                                          homeController.myOrders.clear();
-                                          BottomNavigationController
-                                              bottomNavigationController =
-                                              Get.find<
-                                                  BottomNavigationController>();
-                                          bottomNavigationController.setIndex(
-                                              0, 0);
-                                          Get.off(() =>
-                                              BottomNavigationBarScreen(
-                                                  index: 0));
-                                        },
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 8.0,top:5),
-                                          child: Text(
-                                            "Skip",
-                                            textAlign: TextAlign.end,
-                                            style: Get.textTheme.titleMedium!
-                                                .copyWith(
-                                              color: Colors.black,
-                                            ),
-                                          ).tr(),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: Get.height * 0.02),
-                                  Image.asset(
-                                    "assets/images/splash.png",
-                                    fit: BoxFit.cover,
-                                    height: Get.height * 0.15,
-                                  ),
-                                  // Text('Get Daily Horoscope',
-                                  //         style: Get.textTheme.titleMedium!
-                                  //             .copyWith(
-                                  //                 color: Colors.white,
-                                  //                 fontWeight: FontWeight.w600),
-                                  //         textAlign: TextAlign.center)
-                                  //     .tr()
-                                ],
-                              )))),
+
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Login',
+                                style: Get.textTheme.titleLarge!
+                                    .copyWith(
+                                    fontFamily: 'Marcellus',
+                                    fontSize: 35,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w800),
+                                textAlign: TextAlign.center),
+
+
+                          ],
+                        ),
+                      ),
+                      Column(
+                        children: [
+                          Text('Welcome please create or login to continue using this app',
+                              style: Get.textTheme.titleMedium!
+                                  .copyWith(
+                                  fontFamily: 'Marcellus',
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w400),
+                              textAlign: TextAlign.center),
+                        ],
+                      ),
                       Container(
                           width: Get.width,
                           margin: EdgeInsets.symmetric(
-                              horizontal: Get.width * 0.03),
+                              horizontal: Get.width * 0.03,vertical: Get.height * 0.4),
+
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(
-                                height: Get.height * 0.06,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('Login to Astroway',
-                                          style: Get.textTheme.titleMedium!
-                                              .copyWith(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w800),
-                                          textAlign: TextAlign.center)
-                                      .tr(),
-                                ],
-                              ),
+
+
                               SizedBox(
                                 height: Get.height * 0.02,
                               ),
@@ -155,9 +113,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   children: [
                                     Container(
                                     decoration:  BoxDecoration(
-                                      color: Colors.white,
+                                      color: Get.theme.primaryColorLight,
                                       borderRadius: BorderRadius.all(Radius.circular(10)),
-                                    border: Border.all(color: Colors.grey),
+                                    border: Border.all(color:Get.theme.primaryColorLight,),
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.only(left: 2),
@@ -178,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   border: InputBorder.none,
                                                   hintText: 'Phone number',
                                                   hintStyle: TextStyle(
-                                                    color: Colors.grey,
+                                                    color: Colors.white,
                                                     fontSize: 16,
                                                     fontFamily: "verdana_regular",
                                                     fontWeight: FontWeight.w400,
@@ -192,15 +150,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                               ),
                                               ignoreBlank: false,
                                               autoValidateMode: AutovalidateMode.disabled,
-                                              selectorTextStyle: const TextStyle(color: Colors.black),
+                                              selectorTextStyle: const TextStyle(color: Colors.white),
                                               searchBoxDecoration: InputDecoration(
                                                   border: OutlineInputBorder(
                                                     borderRadius: BorderRadius.all(Radius.circular(2.w)),
                                                     borderSide: const BorderSide(color: Colors.black),
                                                   ),
                                                   hintText: "Search",
-                                                  hintStyle: const TextStyle(
-                                                    color: Colors.black,
+                                                  hintStyle: TextStyle(
+                                                    color: Get.theme.primaryColorLight,
                                                   )),
                                               initialValue: _initialPhone,
                                               formatInput: false,
@@ -252,7 +210,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         width: double.infinity,
                                         margin: EdgeInsets.only(top: 20),
                                         decoration: BoxDecoration(
-                                          color: Get.theme.primaryColor,
+                                          color: Get.theme.primaryColorLight,
                                           borderRadius: const BorderRadius.all(
                                               Radius.circular(10)),
                                         ),
@@ -261,20 +219,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            SizedBox(
-                                              width: 10,
-                                            ),
+
                                             Text(
-                                              'SEND OTP',
+                                              'Send Otp',
                                               style: TextStyle(
+                                                fontFamily: 'Marcellus',
+                                                  fontWeight: FontWeight.normal,
+                                                  fontSize: 20,
                                                   color: Colors.white),
                                               textAlign: TextAlign.center,
                                             ).tr(),
-                                            Image.asset(
-                                              'assets/images/arrow_left.png',
-                                              color: Colors.white,
-                                              width: 20,
-                                            )
+
                                           ],
                                         ),
                                       ),
@@ -303,7 +258,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                             height:6.h,
                                             width: 16.w,
                                             fit: BoxFit.cover,),
-                                            Text('Continue with Whatsapp'),
+                                            Text('Continue with Whatsapp',style: TextStyle(
+                                              color: Colors.white
+                                            ),),
                                           ],
                                         ),
                                       ),
@@ -333,7 +290,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                               width: 7.w,
                                               fit: BoxFit.fitWidth,),
                                             SizedBox(width: 3.w,),
-                                            Text('Continue with Gmail'),
+                                            Text('Continue with Gmail',style: TextStyle(
+                                                color: Colors.white
+                                            ),),
                                           ],
                                         ),
                                       ),
@@ -397,183 +356,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ],
                                 );
                               }),
-                              SizedBox(
-                                height: Get.height * 0.03,
-                              ),
-                              InkWell(
-                                onTap: (){
 
-                                },
-                                child: Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 2.w),
-                                  height: 5.h,
-                                  color: Color(0xFFef4e5e), // Background color
-                                  child: Stack(
-                                    children: [
-                                      Positioned(
-                                        left: -2,
-                                        top: 0,
-                                        bottom: 0,
-                                        child: CustomPaint(
-                                          size: Size(15, 5.h), // Adjust the size of the triangle
-                                          painter: LeftTrianglePainter(),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        right: -2,
-                                        top: 0,
-                                        bottom: 0,
-                                        child: CustomPaint(
-                                          size: Size(15, 5.h), // Adjust the size of the triangle
-                                          painter: RightTrianglePainter(),
-                                        ),
-                                      ),
-                                      Center(
-                                        child: Text(
-                                          'First Chat Free on Signup',
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 17.sp,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                height: 19.h,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Container(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Card(
-                                        elevation: 0,
-                                        margin: EdgeInsets.only(top: 6),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.zero),
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 15, horizontal: 6)
-                                              .copyWith(bottom: 10),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Column(
-                                                children: [
-                                                  Container(
-                                                    height: 68,
-                                                    width: 70,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                      BorderRadius.circular(7),
-                                                      color: Colors.grey[200],
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                      const EdgeInsets.all(10),
-                                                      child: Image.asset(
-                                                        Images.confidential,
-                                                        height: 45,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 12,
-                                                  ),
-                                                  Text(
-                                                    'Private &\nConfidential',
-                                                    textAlign: TextAlign.center,
-                                                    style: Get
-                                                        .theme.textTheme.titleMedium!
-                                                        .copyWith(
-                                                      fontSize: 14.sp,
-                                                      fontWeight: FontWeight.w400,
-                                                      letterSpacing: 0.0,
-                                                    ),
-                                                  ).tr(),
-                                                ],
-                                              ),
-                                              Column(
-                                                children: [
-                                                  Container(
-                                                    height: 65,
-                                                    width: 70,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                      BorderRadius.circular(7),
-                                                      color: Colors.grey[200],
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                      const EdgeInsets.all(10),
-                                                      child: Image.asset(
-                                                        Images.verifiedAccount,
-                                                        height: 45,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 12,
-                                                  ),
-                                                  Text(
-                                                    'Verified\nAstrologers',
-                                                    textAlign: TextAlign.center,
-                                                    style: Get
-                                                        .theme.textTheme.titleMedium!
-                                                        .copyWith(
-                                                      fontSize: 14.sp,
-                                                      fontWeight: FontWeight.w400,
-                                                      letterSpacing: 0.0,
-                                                    ),
-                                                  ).tr(),
-                                                ],
-                                              ),
-                                              Column(
-                                                children: [
-                                                  Container(
-                                                    height: 65,
-                                                    width: 70,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                      BorderRadius.circular(7),
-                                                      color: Colors.grey[200],
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                      const EdgeInsets.all(10),
-                                                      child: Image.asset(
-                                                        Images.payment,
-                                                        height: 45,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 12,
-                                                  ),
-                                                  Text(
-                                                    'Secure\nPayments',
-                                                    textAlign: TextAlign.center,
-                                                    style: Get
-                                                        .theme.textTheme.titleMedium!
-                                                        .copyWith(
-                                                      fontSize: 14.sp,
-                                                      fontWeight: FontWeight.w400,
-                                                      letterSpacing: 0.0,
-                                                    ),
-                                                  ).tr(),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+
+
                             ],
                           )),
                     ],
@@ -615,42 +400,6 @@ class CustomClipPath extends CustomClipper<Path> {
 }
 
 
-class LeftTrianglePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()..color = Colors.white; // Triangle color
 
-    Path path = Path();
-    path.moveTo(size.width, size.height / 2);
-    path.lineTo(0, 0);
-    path.lineTo(0, size.height);
-    path.close();
 
-    canvas.drawPath(path, paint);
-  }
 
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
-  }
-}
-
-class RightTrianglePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()..color = Colors.white; // Triangle color
-
-    Path path = Path();
-    path.moveTo(0, size.height / 2);
-    path.lineTo(size.width, 0);
-    path.lineTo(size.width, size.height);
-    path.close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
-  }
-}
