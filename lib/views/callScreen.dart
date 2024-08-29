@@ -86,7 +86,7 @@ class _CallScreenState extends State<CallScreen> {
         return true;
       },
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor:Get.theme.primaryColor,
         key: drawerKey,
         drawer: DrawerWidget(),
         appBar: CustomAppBar(
@@ -227,7 +227,7 @@ class _CallScreenState extends State<CallScreen> {
                             padding: EdgeInsets.only(bottom: 5),
                             backgroundColor: chatController.isSelected == index
                                 ? Colors.transparent
-                                : Colors.white,
+                                : Get.theme.primaryColorLight,
                             shape: RoundedRectangleBorder(
                                 side: BorderSide(
                                   color: chatController.isSelected == index
@@ -956,6 +956,7 @@ class TabViewAstrologer extends StatelessWidget {
           child: Column(
             children: [
               Card(
+                color: Get.theme.primaryColor,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -1058,8 +1059,13 @@ class TabViewAstrologer extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    astrologerList[index].name,
-                                  ).tr(),
+                                    astrologerList[index].name,style: TextStyle(
+                            fontFamily: 'Marcellus',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                            color: Colors.white,
+                          ),).tr(),
+
                                   SizedBox(
                                     width: 3,
                                   ),
@@ -1077,7 +1083,7 @@ class TabViewAstrologer extends StatelessWidget {
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
                                         fontWeight: FontWeight.w300,
-                                        color: Colors.grey[600],
+                                        color: Colors.white,
                                       ),
                                     ).tr(),
                               astrologerList[index].languageKnown == ""
@@ -1088,7 +1094,7 @@ class TabViewAstrologer extends StatelessWidget {
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
                                         fontWeight: FontWeight.w300,
-                                        color: Colors.grey[600],
+                                        color: Colors.white,
                                       ),
                                     ).tr(),
                               Text(
@@ -1096,7 +1102,7 @@ class TabViewAstrologer extends StatelessWidget {
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   fontWeight: FontWeight.w300,
-                                  color: Colors.grey[600],
+                                  color: Colors.white,
                                 ),
                               ).tr(),
                               Row(

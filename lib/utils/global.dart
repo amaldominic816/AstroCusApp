@@ -56,39 +56,39 @@ NetworkController networkController = Get.put((NetworkController()));
 SplashController splashController = Get.find<SplashController>();
 final DateFormat formatter = DateFormat("dd MMM yy, hh:mm a");
 
-// String stripeBaseApi = 'https://dodgerblue-wallaby-629440.hostingersite.com/v1';
-//
-// String baseUrl = "https://dodgerblue-wallaby-629440.hostingersite.com/api";
-// String imgBaseurl = "https://dodgerblue-wallaby-629440.hostingersite.com/";
-// String webBaseUrl = "https://dodgerblue-wallaby-629440.hostingersite.com/api/";
-// String appMode = "LIVE";
-// Map<String, dynamic> appParameters = {
-//   "LIVE": {
-//     "apiUrl": "https://dodgerblue-wallaby-629440.hostingersite.com/api",
-//     "imageBaseurl": "https://dodgerblue-wallaby-629440.hostingersite.com/",
-//   },
-//   "DEV": {
-//     "apiUrl": "http://192.168.29.223:8001/api",
-//     "imageBaseurl": "http://192.168.29.223:8001/",
-//   }
-// };
+String stripeBaseApi = 'https://dodgerblue-wallaby-629440.hostingersite.com/v1';
 
-String stripeBaseApi = 'https://astroway.diploy.in/v1';
-
-String baseUrl = "https://astroway.diploy.in/api";
-String imgBaseurl = "https://astroway.diploy.in/";
-String webBaseUrl = "https://astroway.diploy.in/api/";
+String baseUrl = "https://dodgerblue-wallaby-629440.hostingersite.com/api";
+String imgBaseurl = "https://dodgerblue-wallaby-629440.hostingersite.com/";
+String webBaseUrl = "https://dodgerblue-wallaby-629440.hostingersite.com/api/";
 String appMode = "LIVE";
 Map<String, dynamic> appParameters = {
   "LIVE": {
-    "apiUrl": "https://astroway.diploy.in/api",
-    "imageBaseurl": "https://astroway.diploy.in/",
+    "apiUrl": "https://dodgerblue-wallaby-629440.hostingersite.com/api",
+    "imageBaseurl": "https://dodgerblue-wallaby-629440.hostingersite.com/",
   },
   "DEV": {
     "apiUrl": "http://192.168.29.223:8001/api",
     "imageBaseurl": "http://192.168.29.223:8001/",
   }
 };
+
+// String stripeBaseApi = 'https://astroway.diploy.in/v1';
+//
+// String baseUrl = "https://astroway.diploy.in/api";
+// String imgBaseurl = "https://astroway.diploy.in/";
+// String webBaseUrl = "https://astroway.diploy.in/api/";
+// String appMode = "LIVE";
+// Map<String, dynamic> appParameters = {
+//   "LIVE": {
+//     "apiUrl": "https://astroway.diploy.in/api",
+//     "imageBaseurl": "https://astroway.diploy.in/",
+//   },
+//   "DEV": {
+//     "apiUrl": "http://192.168.29.223:8001/api",
+//     "imageBaseurl": "http://192.168.29.223:8001/",
+//   }
+// };
 String agoraChannelName = ""; //valid 24hr
 String agoraToken = "";
 String channelName = "astrowayLive";

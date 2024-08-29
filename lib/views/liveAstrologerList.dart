@@ -45,7 +45,7 @@ class LiveAstrologerListScreen extends StatelessWidget {
         }
       },
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Get.theme.primaryColorLight,
         appBar: AppBar(
           backgroundColor:
               Get.theme.appBarTheme.systemOverlayStyle!.statusBarColor,
@@ -289,6 +289,7 @@ class LiveAstrologerListScreen extends StatelessWidget {
                                               AstrologerProfile(index: index));
                                         },
                                         child: Card(
+                                           color:  Get.theme.primaryColor,
                                           child: Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: Row(
@@ -353,30 +354,19 @@ class LiveAstrologerListScreen extends StatelessWidget {
                                                       children: [
                                                         Text(
                                                           '${upcomingController.upComingList[index].name}',
-                                                          style: Get
-                                                              .theme
-                                                              .primaryTextTheme
-                                                              .bodySmall!
-                                                              .copyWith(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                  fontSize: 12,
-                                                                  color: Colors
-                                                                      .black),
-                                                        ).tr(),
+                                                           style: TextStyle(
+                                                      fontFamily: 'Marcellus',
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 15,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ).tr(),
                                                         Text(
                                                           "${DateFormat("dd MMM,EEEE").format(DateTime.now())}",
-                                                          style: Get
-                                                              .theme
-                                                              .primaryTextTheme
-                                                              .bodySmall!
-                                                              .copyWith(
-                                                            fontWeight:
-                                                                FontWeight.w300,
-                                                            color: Colors
-                                                                .grey[600],
-                                                          ),
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 8,
+                                                          )
                                                         ),
                                                         upcomingController
                                                                     .upComingList[

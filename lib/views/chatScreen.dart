@@ -77,7 +77,7 @@ class _ChatScreenState extends State<ChatScreen> {
         return false;
       },
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Get.theme.primaryColor,
         key: drawerKey,
         drawer: DrawerWidget(),
         appBar: CustomAppBar(
@@ -215,7 +215,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             padding: EdgeInsets.only(bottom: 5),
                             backgroundColor: chatController.isSelected == index
                                 ? Colors.transparent
-                                : Colors.white,
+                                : Get.theme.primaryColorLight,
                             shape: RoundedRectangleBorder(
                                 side: BorderSide(
                                   color: chatController.isSelected == index
@@ -245,7 +245,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                   Text(
                                     chatController.categoryList[index].name,
                                     style: Get.theme.primaryTextTheme.bodySmall!
-                                        .copyWith(fontWeight: FontWeight.w300),
+                                        .copyWith(
+
+                                        fontFamily:'Marcellus',fontWeight: FontWeight.w300),
                                   ).tr(),
                                 ],
                               ),
@@ -264,7 +266,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               child: Text(
                                 'Astrologer not available',
                                 style: TextStyle(
-                                    fontWeight: FontWeight.w400, fontSize: 18),
+                                    fontFamily:'Marcellus', fontWeight: FontWeight.w400, fontSize: 18),
                               ).tr(),
                             ),
                           )
@@ -935,6 +937,7 @@ class TabViewWidget extends StatelessWidget {
           child: Column(
             children: [
               Card(
+                color:  Get.theme.primaryColor,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -1037,8 +1040,13 @@ class TabViewWidget extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    astrologerList[index].name,
-                                  ).tr(),
+                                    astrologerList[index].name, style: TextStyle(
+                            fontFamily: 'Marcellus',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                            color: Colors.white,
+                                  ),).tr(),
+
                                   SizedBox(
                                     width: 3,
                                   ),
@@ -1056,7 +1064,7 @@ class TabViewWidget extends StatelessWidget {
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
                                         fontWeight: FontWeight.w300,
-                                        color: Colors.grey[600],
+                                        color: Colors.white,
                                       ),
                                     ).tr(),
                               astrologerList[index].languageKnown == ""
@@ -1067,7 +1075,7 @@ class TabViewWidget extends StatelessWidget {
                                           .theme.primaryTextTheme.bodySmall!
                                           .copyWith(
                                         fontWeight: FontWeight.w300,
-                                        color: Colors.grey[600],
+                                        color: Colors.white,
                                       ),
                                     ).tr(),
                               Text(
@@ -1075,7 +1083,7 @@ class TabViewWidget extends StatelessWidget {
                                 style: Get.theme.primaryTextTheme.bodySmall!
                                     .copyWith(
                                   fontWeight: FontWeight.w300,
-                                  color: Colors.grey[600],
+                                  color: Colors.white,
                                 ),
                               ).tr(),
                             ],
