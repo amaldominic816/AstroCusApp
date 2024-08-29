@@ -327,7 +327,7 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
         return true;
       },
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Get.theme.primaryColorLight,
         appBar: AppBar(
             backgroundColor:
                 Get.theme.appBarTheme.systemOverlayStyle!.statusBarColor,
@@ -456,734 +456,134 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                 GetBuilder<BottomNavigationController>(
                     builder: (bottomController) {
                   return SizedBox(
-                    child: Card(
+                    child:Card(
+                      color: Get.theme.primaryColor,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center, // Center content horizontally
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 5),
-                                      child:   GetBuilder<HomeController>(builder: (homeController) {
-                                          return InkWell(
-                                            onTap: (){
-                                              homeController.viewSingleStory.length==0?null:
-                                              Navigator.of(context).push(
-                                                MaterialPageRoute(builder: (context) => ViewStoriesScreen(profile: "${global.imgBaseurl}${bottomController.astrologerbyId[0].profileImage}",
-                                                  name: bottomController.astrologerbyId[0].name.toString(),isprofile: true,
-                                                astroId:int.parse(bottomController.astrologerbyId[0].id.toString()) ,)),
-                                              );
-                                            },
-                                            child: Container(
-                                                height: 70,
-                                              width: 70,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(36),
-                                                  border: Border.all(
-
-                                                      width: 4,
-                                                      color:homeController.viewSingleStory.length==0?Colors.grey: Get.theme.primaryColor)),
-                                              child: ClipRRect(
-                                                borderRadius: BorderRadius.circular(36),
-                                               // backgroundColor: Colors.white,
-                                                child: CachedNetworkImage(
-                                                  imageUrl:
-                                                      "${global.imgBaseurl}${bottomController.astrologerbyId[0].profileImage}",
-                                                  fit: BoxFit.cover,
-                                                  placeholder: (context, url) =>
-                                                      const Center(
-                                                          child:
-                                                              CircularProgressIndicator()),
-                                                  errorWidget: (context, url, error) {
-                                                    return CircleAvatar(
-                                                        radius: 35,
-                                                        backgroundColor: Colors.white,
-                                                        child: Image.asset(
-                                                          Images.deafultUser,
-                                                          fit: BoxFit.fill,
-                                                          height: 50,
-                                                        ));
-                                                  },
-                                                ),
-                                              ),
+                            // Profile Image Row
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                              child: GetBuilder<HomeController>(
+                                builder: (homeController) {
+                                  return InkWell(
+                                    onTap: () {
+                                      if (homeController.viewSingleStory.isNotEmpty) {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) => ViewStoriesScreen(
+                                              profile: "${global.imgBaseurl}${bottomController.astrologerbyId[0].profileImage}",
+                                              name: bottomController.astrologerbyId[0].name.toString(),
+                                              isprofile: true,
+                                              astroId: int.parse(bottomController.astrologerbyId[0].id.toString()),
                                             ),
-                                          );
-                                        }
+                                          ),
+                                        );
+                                      }
+                                    },
+                                    child: Container(
+                                      height: 70,
+                                      width: 70,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(36),
+                                        border: Border.all(
+                                          width: 4,
+                                          color: homeController.viewSingleStory.isEmpty ? Colors.white : Get.theme.primaryColorLight,
+                                        ),
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(36),
+                                        child: CachedNetworkImage(
+                                          imageUrl: "${global.imgBaseurl}${bottomController.astrologerbyId[0].profileImage}",
+                                          fit: BoxFit.cover,
+                                          placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                                          errorWidget: (context, url, error) {
+                                            return CircleAvatar(
+                                              radius: 35,
+                                              backgroundColor: Colors.white,
+                                              child: Image.asset(
+                                                Images.deafultUser,
+                                                fit: BoxFit.fill,
+                                                height: 50,
+                                              ),
+                                            );
+                                          },
+                                        ),
                                       ),
                                     ),
-                                    bottomController.astrologerbyId[0].isFollow!
-                                        ? Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 5),
-                                            child: Container(
-                                              padding: EdgeInsets.all(8.0),
-                                              decoration: BoxDecoration(
-                                                color: Colors
-                                                    .blue, //Get.theme.primaryColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(15),
-                                              ),
-                                              child: Text(
-                                                'Following',
-                                                style: Get.textTheme.bodyMedium!
-                                                    .copyWith(
-                                                        fontSize: 10,
-                                                        color: Colors.white),
-                                                textAlign: TextAlign.center,
-                                              ).tr(),
-                                            ),
-                                          )
-                                        : Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 5),
-                                            child: Align(
-                                              alignment: Alignment.bottomRight,
-                                              child: GetBuilder<
-                                                      FollowAstrologerController>(
-                                                  builder:
-                                                      (followAstrologerController) {
-                                                return InkWell(
-                                                  onTap: () async {
-                                                    log('message');
-                                                    bool isLogin =
-                                                        await global.isLogin();
-                                                    if (isLogin) {
-                                                      global
-                                                          .showOnlyLoaderDialog(
-                                                              context);
-                                                      await followAstrologerController
-                                                          .addFollowers(
-                                                              bottomNavigationController
-                                                                  .astrologerbyId[
-                                                                      0]
-                                                                  .id!);
-                                                      global.hideLoader();
-                                                    }
-                                                  },
-                                                  child: Container(
-                                                    padding:
-                                                        EdgeInsets.all(8.0),
-                                                    decoration: BoxDecoration(
-                                                      color: Colors
-                                                          .blue, //Get.theme.primaryColor,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15),
-                                                    ),
-                                                    child: Text(
-                                                      'Follow',
-                                                      style: Get
-                                                          .textTheme.bodyMedium!
-                                                          .copyWith(
-                                                              fontSize: 10,
-                                                              color:
-                                                                  Colors.white),
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                    ).tr(),
-                                                  ),
-                                                );
-                                              }),
-                                            )),
-                                  ],
-                                ),
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text(
-                                              bottomController
-                                                  .astrologerbyId[0].name!,
-                                            ).tr(),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Image.asset(
-                                              Images.right,
-                                              height: 20,
-                                            ),
-                                          ],
-                                        ),
-                                        bottomController.astrologerbyId[0]
-                                                    .primarySkill ==
-                                                ""
-                                            ? const SizedBox()
-                                            : Text(
-                                                '${bottomController.astrologerbyId[0].primarySkill!}',
-                                                style: Get.theme
-                                                    .primaryTextTheme.bodySmall!
-                                                    .copyWith(
-                                                  fontWeight: FontWeight.w300,
-                                                  color: Colors.grey[600],
-                                                ),
-                                              ).tr(),
-                                        bottomController.astrologerbyId[0]
-                                                    .currentCity ==
-                                                ""
-                                            ? const SizedBox()
-                                            : Text(
-                                                bottomController
-                                                    .astrologerbyId[0]
-                                                    .currentCity!,
-                                                style: Get.theme
-                                                    .primaryTextTheme.bodySmall!
-                                                    .copyWith(
-                                                  fontWeight: FontWeight.w300,
-                                                  color: Colors.grey[600],
-                                                ),
-                                              ).tr(),
-                                        bottomController.astrologerbyId[0]
-                                                    .languageKnown ==
-                                                ""
-                                            ? const SizedBox()
-                                            : Text(
-                                                bottomController
-                                                    .astrologerbyId[0]
-                                                    .languageKnown!,
-                                                style: Get.theme
-                                                    .primaryTextTheme.bodySmall!
-                                                    .copyWith(
-                                                  fontWeight: FontWeight.w300,
-                                                  color: Colors.grey[600],
-                                                ),
-                                              ).tr(),
-                                        Text(
-                                          'Experience : ${bottomController.astrologerbyId[0].experienceInYears} Years',
-                                          style: Get
-                                              .theme.primaryTextTheme.bodySmall!
-                                              .copyWith(
-                                            fontWeight: FontWeight.w300,
-                                            color: Colors.grey[600],
-                                          ),
-                                        ).tr(),
-                                        Row(
-                                          children: [
-                                            bottomController.astrologerbyId[0]
-                                                        .isFreeAvailable ==
-                                                    true
-                                                ? Text(
-                                                    'FREE',
-                                                    style: Get.theme.textTheme
-                                                        .titleMedium!
-                                                        .copyWith(
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      letterSpacing: 0,
-                                                      color: Color.fromARGB(
-                                                          255, 167, 1, 1),
-                                                    ),
-                                                  ).tr()
-                                                : const SizedBox(),
-                                            SizedBox(
-                                              width: bottomController
-                                                          .astrologerbyId[0]
-                                                          .isFreeAvailable ==
-                                                      true
-                                                  ? 10
-                                                  : 0,
-                                            ),
-                                            Text(
-                                              '${global.getSystemFlagValueForLogin(global.systemFlagNameList.currency)}${bottomController.astrologerbyId[0].charge}/min',
-                                              style: Get
-                                                  .theme.textTheme.titleMedium!
-                                                  .copyWith(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w300,
-                                                letterSpacing: 0,
-                                                decoration: bottomController
-                                                            .astrologerbyId[0]
-                                                            .isFreeAvailable ==
-                                                        true
-                                                    ? TextDecoration.lineThrough
-                                                    : null,
-                                                color: bottomController
-                                                            .astrologerbyId[0]
-                                                            .isFreeAvailable ==
-                                                        true
-                                                    ? Colors.grey
-                                                    : Color.fromARGB(
-                                                        255, 167, 1, 1),
-                                              ),
-                                            ).tr(),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                            // Name Row with Icon
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  bottomController.astrologerbyId[0].name!,
+                                  style: TextStyle(
+                                    fontFamily: 'Marcellus',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                    color: Colors.white,
                                   ),
+                                ).tr(),
+                                SizedBox(width: 10),
+                                Image.asset(
+                                  Images.right,
+                                  height: 20,
                                 ),
-                                PopupMenuButton(
-                                    icon: Icon(
-                                      Icons.more_vert,
-                                      color: Colors.grey,
-                                    ),
-                                    onSelected: (value) async {
-                                      if (value == "block") {
-                                        bottomController
-                                            .blockAstrologerController
-                                            .clear();
-                                        bool isLogin = await global.isLogin();
-                                        if (isLogin) {
-                                          Get.dialog(AlertDialog(
-                                            backgroundColor: Colors.white,
-                                            scrollable: true,
-                                            title: Column(
-                                              children: [
-                                                Align(
-                                                  alignment: Alignment.topRight,
-                                                  child: GestureDetector(
-                                                      onTap: () async {
-                                                        Get.back();
-                                                      },
-                                                      child: Image.asset(
-                                                        Images.closeRound,
-                                                        height: 25,
-                                                        width: 25,
-                                                      )),
-                                                ),
-                                                Text(
-                                                  'Report & Block',
-                                                  style:
-                                                      TextStyle(fontSize: 18),
-                                                ).tr(),
-                                              ],
-                                            ),
-                                            content: SizedBox(
-                                              height: Get.height * 0.5,
-                                              child: Column(
-                                                children: [
-                                                  CircleAvatar(
-                                                    radius: 36,
-                                                    backgroundColor:
-                                                        Get.theme.primaryColor,
-                                                    child: CircleAvatar(
-                                                      radius: 36,
-                                                      backgroundColor:
-                                                          Colors.yellow,
-                                                      child: CachedNetworkImage(
-                                                        imageUrl:
-                                                            "${global.imgBaseurl}${bottomController.astrologerbyId[0].profileImage}",
-                                                        imageBuilder: (context,
-                                                            imageProvider) {
-                                                          return CircleAvatar(
-                                                            radius: 35,
-                                                            backgroundColor:
-                                                                Colors.white,
-                                                            backgroundImage:
-                                                                imageProvider,
-                                                          );
-                                                        },
-                                                        placeholder: (context,
-                                                                url) =>
-                                                            const Center(
-                                                                child:
-                                                                    CircularProgressIndicator()),
-                                                        errorWidget: (context,
-                                                            url, error) {
-                                                          return CircleAvatar(
-                                                              radius: 35,
-                                                              backgroundColor:
-                                                                  Colors.white,
-                                                              child:
-                                                                  Image.asset(
-                                                                Images
-                                                                    .deafultUser,
-                                                                fit:
-                                                                    BoxFit.fill,
-                                                                height: 50,
-                                                              ));
-                                                        },
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Center(
-                                                    child: Text(
-                                                      '${bottomController.astrologerbyId[0].name}',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ).tr(),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  Center(
-                                                      child: Text(
-                                                              'Reason for blocking*')
-                                                          .tr()),
-                                                  TextField(
-                                                    controller: bottomController
-                                                        .blockAstrologerController,
-                                                    keyboardType:
-                                                        TextInputType.multiline,
-                                                    minLines: 3,
-                                                    maxLines: 3,
-                                                    decoration: InputDecoration(
-                                                      isDense: true,
-                                                      hintText:
-                                                          "Write your reason...",
-                                                      helperStyle: TextStyle(
-                                                          color: Colors.grey,
-                                                          fontSize: 14),
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: Colors.grey),
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    5.0)),
-                                                      ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: Colors.grey),
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    5.0)),
-                                                      ),
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: Colors.grey),
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    5.0)),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  ElevatedButton(
-                                                    onPressed: () async {
-                                                      global
-                                                          .showOnlyLoaderDialog(
-                                                              context);
-                                                      await bottomController
-                                                          .astrologerReportAndBlock(
-                                                              bottomController
-                                                                  .astrologerbyId[
-                                                                      0]
-                                                                  .id!);
-                                                      global.hideLoader();
-                                                      Get.back();
-                                                    },
-                                                    child: Text('Submit').tr(),
-                                                    style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStateProperty
-                                                              .all(Get.theme
-                                                                  .primaryColor),
-                                                      foregroundColor:
-                                                          MaterialStateProperty
-                                                              .all(
-                                                                  Colors.black),
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    '*You can unblock the astrologer from settings section.',
-                                                    style:
-                                                        TextStyle(fontSize: 12),
-                                                  ).tr(),
-                                                ],
-                                              ),
-                                            ),
-                                          ));
-                                        }
-                                      }
-
-                                      if (value == "unblock") {
-                                        SettingsController settingsController =
-                                            Get.find<SettingsController>();
-                                        global.showOnlyLoaderDialog(context);
-                                        await settingsController
-                                            .unblockAstrologer(
-                                                bottomNavigationController
-                                                    .astrologerbyId[0].id!);
-                                        global.hideLoader();
-                                      }
-                                    },
-                                    itemBuilder: (context) => [
-                                          PopupMenuItem(
-                                            child: bottomNavigationController
-                                                    .astrologerbyId[0].isBlock!
-                                                ? Text('Unblock').tr()
-                                                : Text('Report & Block').tr(),
-                                            value: bottomNavigationController
-                                                    .astrologerbyId[0].isBlock!
-                                                ? "unblock"
-                                                : "block",
-                                          ),
-                                        ]),
                               ],
                             ),
-                            Divider(
-                              thickness: 2,
-                            ),
-                            IntrinsicHeight(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () async {
-                                      bool isLogin = await global.isLogin();
-                                      if (isLogin) {
-                                        double charge = double.parse(
-                                            bottomNavigationController
-                                                .astrologerbyId[0].charge!
-                                                .toString());
-                                        if (charge * 5 <=
-                                                global
-                                                    .splashController
-                                                    .currentUser!
-                                                    .walletAmount! ||
-                                            bottomNavigationController
-                                                    .astrologerbyId[0]
-                                                    .isFreeAvailable ==
-                                                true) {
-                                          if (bottomNavigationController
-                                                      .astrologerbyId[0]
-                                                      .chatStatus ==
-                                                  "Online" ||
-                                              bottomNavigationController
-                                                      .astrologerbyId[0]
-                                                      .chatStatus ==
-                                                  "Wait Time") {
-                                            await bottomNavigationController
-                                                .checkAlreadyInReq(
-                                                    bottomNavigationController
-                                                        .astrologerbyId[0].id!);
-
-                                            if (bottomNavigationController
-                                                    .isUserAlreadyInChatReq ==
-                                                false) {
-                                              global.showOnlyLoaderDialog(
-                                                  context);
-                                              if (bottomNavigationController
-                                                      .astrologerbyId[0]
-                                                      .chatWaitTime !=
-                                                  null) {
-                                                if (bottomNavigationController
-                                                        .astrologerbyId[0]
-                                                        .chatWaitTime!
-                                                        .difference(
-                                                            DateTime.now())
-                                                        .inMinutes <
-                                                    0) {
-                                                  await bottomNavigationController
-                                                      .changeOfflineStatus(
-                                                          bottomNavigationController
-                                                              .astrologerbyId[0]
-                                                              .id!,
-                                                          "Online");
-                                                }
-                                              }
-
-                                              await Get.to(() =>
-                                                  CallIntakeFormScreen(
-                                                    type: "Chat",
-                                                    astrologerId:
-                                                        bottomNavigationController
-                                                            .astrologerbyId[0]
-                                                            .id!,
-                                                    astrologerName:
-                                                        bottomNavigationController
-                                                            .astrologerbyId[0]
-                                                            .name!,
-                                                    astrologerProfile:
-                                                        bottomNavigationController
-                                                            .astrologerbyId[0]
-                                                            .profileImage!,
-                                                    isFreeAvailable:
-                                                        bottomNavigationController
-                                                            .astrologerbyId[0]
-                                                            .isFreeAvailable!,
-                                                  ));
-                                              global.hideLoader();
-                                            } else {
-                                              bottomNavigationController
-                                                  .dialogForNotCreatingSession(
-                                                      context);
-                                            }
-                                          } else if (bottomNavigationController
-                                                  .astrologerbyId[0]
-                                                  .chatStatus ==
-                                              "Offline") {
-                                            dialogForJoinInWaitList(
-                                                context,
-                                                bottomNavigationController
-                                                    .astrologerbyId[0].name!,
-                                                true,
-                                                bottomNavigationController
-                                                    .astrologerbyId[0].chatStatus.toString()
-                                            );
-                                          }
-                                        } else {
-                                          global.showOnlyLoaderDialog(context);
-                                          await walletController.getAmount();
-                                          global.hideLoader();
-                                          openBottomSheetRechrage(
-                                              context,
-                                              (charge * 5).toString(),
-                                              'chat',
-                                              '${bottomNavigationController.astrologerbyId[0].name}');
-                                        }
-                                      }
-                                    },
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.chat,
-                                          color: Colors.grey,
-                                          size: 18,
-                                        ),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text(
-                                            "${bottomNavigationController.astrologerbyId[0].chatMin!} Mins"),
-                                      ],
-                                    ),
+                            SizedBox(height: 8), // Space between rows
+                            // Category Row
+                            if (bottomController.astrologerbyId[0].primarySkill != "")
+                              Text(
+                                '${bottomController.astrologerbyId[0].primarySkill!}',
+                                style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.white,
+                                ),
+                              ).tr(),
+                            SizedBox(height: 8),
+                            // Languages Row
+                            if (bottomController.astrologerbyId[0].languageKnown != "")
+                              Text(
+                                bottomController.astrologerbyId[0].languageKnown!,
+                                style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.white,
+                                ),
+                              ).tr(),
+                            SizedBox(height: 8),
+                            // Charges and Experience Row
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                // Charges
+                                Text(
+                                  '${global.getSystemFlagValueForLogin(global.systemFlagNameList.currency)}${bottomController.astrologerbyId[0].charge}/hr',
+                                  style: Get.theme.textTheme.titleMedium!.copyWith(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w300,
+                                    letterSpacing: 0,
+                                    color: Colors.white,
+                                    // decoration: bottomController.astrologerbyId[0].isFreeAvailable ? TextDecoration.lineThrough : null,
+                                    // color: bottomController.astrologerbyId[0].isFreeAvailable ? Colors.white : Color.fromARGB(255, 167, 1, 1),
                                   ),
-                                  VerticalDivider(
-                                    thickness: 2,
+                                ).tr(),
+                                SizedBox(width: 20),
+                                // Experience
+                                Text(
+                                  'Exp: ${bottomController.astrologerbyId[0].experienceInYears} Years',
+                                  style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
+                                    fontWeight: FontWeight.w300,
+                                    color: Colors.white,
                                   ),
-                                  GestureDetector(
-                                    onTap: () async {
-                                      bool isLogin = await global.isLogin();
-                                      if (isLogin) {
-                                        double charge = double.parse(
-                                            bottomNavigationController
-                                                .astrologerbyId[0].charge!
-                                                .toString());
-                                        if (charge * 5 <=
-                                                global
-                                                    .splashController
-                                                    .currentUser!
-                                                    .walletAmount! ||
-                                            bottomNavigationController
-                                                    .astrologerbyId[0]
-                                                    .isFreeAvailable ==
-                                                true) {
-                                          if (bottomNavigationController
-                                                      .astrologerbyId[0]
-                                                      .callStatus ==
-                                                  "Online" ||
-                                              bottomNavigationController
-                                                      .astrologerbyId[0]
-                                                      .callStatus ==
-                                                  "Wait Time") {
-                                            await bottomNavigationController
-                                                .checkAlreadyInReqForCall(
-                                                    bottomNavigationController
-                                                        .astrologerbyId[0].id!);
-                                            if (bottomNavigationController
-                                                    .isUserAlreadyInCallReq ==
-                                                false) {
-                                              global.showOnlyLoaderDialog(
-                                                  context);
-                                              if (bottomNavigationController
-                                                      .astrologerbyId[0]
-                                                      .callWaitTime !=
-                                                  null) {
-                                                if (bottomNavigationController
-                                                        .astrologerbyId[0]
-                                                        .callWaitTime!
-                                                        .difference(
-                                                            DateTime.now())
-                                                        .inMinutes <
-                                                    0) {
-                                                  await bottomNavigationController
-                                                      .changeOfflineCallStatus(
-                                                          bottomNavigationController
-                                                              .astrologerbyId[0]
-                                                              .id!,
-                                                          "Online");
-                                                }
-                                              }
-                                              await Get.to(() =>
-                                                  CallIntakeFormScreen(
-                                                    astrologerProfile:
-                                                        bottomNavigationController
-                                                            .astrologerbyId[0]
-                                                            .profileImage!,
-                                                    type: "Call",
-                                                    astrologerId:
-                                                        bottomNavigationController
-                                                            .astrologerbyId[0]
-                                                            .id!,
-                                                    astrologerName:
-                                                        bottomNavigationController
-                                                            .astrologerbyId[0]
-                                                            .name!,
-                                                    isFreeAvailable:
-                                                        bottomNavigationController
-                                                            .astrologerbyId[0]
-                                                            .isFreeAvailable,
-                                                  ));
-                                              global.hideLoader();
-                                            } else {
-                                              bottomNavigationController
-                                                  .dialogForNotCreatingSession(
-                                                      context);
-                                            }
-                                          } else if (bottomNavigationController
-                                                  .astrologerbyId[0]
-                                                  .callStatus ==
-                                              "Offline") {
-                                            dialogForJoinInWaitList(
-                                                context,
-                                                bottomNavigationController
-                                                    .astrologerbyId[0].name!,
-                                                true,
-                                                bottomNavigationController
-                                                    .astrologerbyId[0].chatStatus.toString()
-                                            );
-                                          }
-                                        } else {
-                                          global.showOnlyLoaderDialog(context);
-                                          await walletController.getAmount();
-                                          global.hideLoader();
-                                          openBottomSheetRechrage(
-                                              context,
-                                              (charge * 5).toString(),
-                                              'call',
-                                              '${bottomNavigationController.astrologerbyId[0].name}');
-                                        }
-                                      }
-                                    },
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.phone,
-                                          color: Colors.grey,
-                                          size: 18,
-                                        ),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text(
-                                            "${bottomNavigationController.astrologerbyId[0].callMin!} mins"),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
+                                ).tr(),
+                              ],
                             ),
                           ],
                         ),
@@ -1194,42 +594,59 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                 SizedBox(
                   width: Get.width,
                   child: Card(
+                    color: Get.theme.primaryColor,
                     elevation: 1,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GetBuilder<UserProfileController>(
-                          builder: (userProfileController) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              bottomNavigationController
-                                  .astrologerbyId[0].loginBio!,
-                              maxLines:
-                                  userProfileController.isShowMore ? null : 2,
-                              style: Get.textTheme.titleMedium!
-                                  .copyWith(fontSize: 14),
-                            ).tr(),
-                            InkWell(
-                                onTap: () {
-                                  userProfileController.showMoreText();
-                                },
-                                child: Text(
-                                  userProfileController.isShowMore
-                                      ? "Show less"
-                                      : "..Show More",
-                                  style: TextStyle(color: Colors.blue),
-                                ).tr())
-                          ],
-                        );
-                      }),
+                        builder: (userProfileController) {
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Adding the 'About Me' heading with an underline
+                              Text(
+                                'About Me',
+                                style: TextStyle(
+                                  fontFamily: 'Marcellus',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                ),
+                              ).tr(),
+                              Container(
+                                width:40,
+                                child: Divider(
+                                  color: Get.theme.primaryColorLight, // Set color of underline
+                                  thickness: 5,
+                                  // Set thickness of underline
+                                ),
+                              ),
+                              SizedBox(height: 8), // Space between 'About Me' and bio text
+
+                              // Bio text without 'Show More'/'Show Less' functionality
+                              Text(
+                                bottomNavigationController.astrologerbyId[0].loginBio!,
+                                maxLines: 2, // Set maxLines as needed
+                                style: TextStyle(
+                                  fontFamily: 'Marcellus',
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 13,
+                                  color: Colors.white,
+                                ),
+                              ).tr(),
+                            ],
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
+
                 Padding(
                   padding: const EdgeInsets.all(6.0),
                   child: Card(
+            color: Get.theme.primaryColor,
                     margin: EdgeInsets.only(top: 10),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -1240,7 +657,30 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('Rating & Reviews').tr(),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Reviews',
+                                    style: TextStyle(
+                                      fontFamily: 'Marcellus',
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Container(
+                                    width:40,
+                                    child: Divider(
+                                      color: Get.theme.primaryColorLight, // Set color of underline
+                                      thickness: 5,
+                                      // Set thickness of underline
+                                    ),
+                                  ),
+                                ],
+                              ),
+
                               GestureDetector(
                                   onTap: () {
                                     reviewController.reviewList.isNotEmpty
@@ -1264,8 +704,9 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                             bgColor: global.toastBackGoundColor,
                                           );
                                   },
-                                  child: Icon(Icons.arrow_forward,
-                                      color: Colors.grey))
+                                  child: Text("See All",style: TextStyle(
+                                    fontSize: 10,
+                                      color: Colors.white),),)
                             ],
                           ),
                           Row(
@@ -1276,7 +717,7 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                 children: [
                                   Text(
                                     '${bottomNavigationController.astrologerbyId[0].rating!.toStringAsFixed(2)}',
-                                    style: Get.textTheme.headlineMedium,
+                                    style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),
                                   ),
                                   RatingBar.builder(
                                     initialRating: 0,
@@ -1286,14 +727,14 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                     ignoreGestures: true,
                                     itemBuilder: (context, _) => Icon(
                                       Icons.star,
-                                      color: Get.theme.primaryColor,
+                                      color: Colors.white,
                                     ),
                                     onRatingUpdate: (rating) {},
                                   ),
                                   Row(
                                     children: [
                                       Icon(Icons.person,
-                                          size: 14, color: Colors.grey),
+                                          size: 14, color: Colors.white),
                                       SizedBox(
                                         width: 5,
                                       ),
@@ -1304,6 +745,7 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                             .copyWith(
                                           fontWeight: FontWeight.w300,
                                           fontSize: 9,
+                                          color: Colors.white
                                         ),
                                       ).tr(),
                                     ],
@@ -1321,7 +763,7 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                       children: [
                                         Text(
                                           '5',
-                                          style: Get.textTheme.titleMedium,
+                                          style: TextStyle(color: Colors.white),
                                         ),
                                         SizedBox(
                                           width: 10,
@@ -1351,7 +793,7 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                     child: Row(
                                       children: [
                                         Text('4',
-                                            style: Get.textTheme.titleMedium),
+                                            style:   TextStyle(color: Colors.white),),
                                         SizedBox(
                                           width: 10,
                                         ),
@@ -1380,7 +822,7 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                     child: Row(
                                       children: [
                                         Text('3',
-                                            style: Get.textTheme.titleMedium),
+                                            style:  TextStyle(color: Colors.white),),
                                         SizedBox(
                                           width: 10,
                                         ),
@@ -1410,7 +852,7 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                     child: Row(
                                       children: [
                                         Text('2',
-                                            style: Get.textTheme.titleMedium),
+                                      style: TextStyle(color: Colors.white),),
                                         SizedBox(
                                           width: 10,
                                         ),
@@ -1439,7 +881,7 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                     child: Row(
                                       children: [
                                         Text('1',
-                                            style: Get.textTheme.titleMedium),
+                                      style: TextStyle(color: Colors.white),),
                                         SizedBox(
                                           width: 10,
                                         ),
@@ -1555,6 +997,7 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                 ),
 
                 Card(
+                  color: Get.theme.primaryColor,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -1565,7 +1008,32 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('Check Similar Astrologer').tr(),
+                                  Column(
+
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,                                    children: [
+                                      Text(
+                                        'Check Similar Astrologers',
+                                        style: TextStyle(
+                                          fontFamily: 'Marcellus',
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Container(
+                                        width:40,
+                                        child: Align(
+                                          child: Divider(
+                                            color: Get.theme.primaryColorLight, // Set color of underline
+                                            thickness: 5,
+                                            // Set thickness of underline
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
                                   InkWell(
                                     onTap: () {
                                       showDialog(
@@ -1609,7 +1077,7 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                             );
                                           });
                                     },
-                                    child: Icon(Icons.info),
+                                    child: Icon(Icons.info,color: Colors.white,),
                                   )
                                 ],
                               )
@@ -1652,6 +1120,7 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                               global.hideLoader();
                                             },
                                             child: Card(
+                                              color: Get.theme.primaryColorLight,
                                               elevation: 4,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
@@ -1660,7 +1129,7 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                               child: Container(
                                                 width: 100,
                                                 decoration: BoxDecoration(
-                                                  color: Colors.white,
+                                                  color: Get.theme.primaryColorLight,
                                                   borderRadius:
                                                       BorderRadius.circular(20),
                                                 ),
@@ -1728,15 +1197,11 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                                           'Astrologer',
                                                       textAlign:
                                                           TextAlign.center,
-                                                      style: Get.theme.textTheme
-                                                          .titleMedium!
-                                                          .copyWith(
-                                                        fontSize: 13,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        letterSpacing: 0,
+                                                      style:
+
+                                                       TextStyle(color: Colors.white),
                                                       ),
-                                                    ).tr(),
+
                                                     Text(
                                                       '${global.getSystemFlagValueForLogin(global.systemFlagNameList.currency)} ${bottomNavigationController.astrologerbyId[0].similiarConsultant![index].charge}/min',
                                                       textAlign:
@@ -1767,6 +1232,7 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                 Padding(
                   padding: const EdgeInsets.only(left: 6, right: 6),
                   child: Card(
+                    color: Get.theme.primaryColorLight,
                     margin: EdgeInsets.only(top: 10),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -1812,15 +1278,14 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                         return Padding(
                                           padding: const EdgeInsets.all(13),
                                           child: SimpleDialog(
-                                            backgroundColor: Colors.white,
+                                            backgroundColor: Get.theme.primaryColorLight,
                                             titlePadding: EdgeInsets.all(8.0),
                                             insetPadding: EdgeInsets.all(8.0),
                                             contentPadding: EdgeInsets.all(8.0),
                                             children: [
                                               Text(
                                                 'You can chat with astrologer\'s assistant only when you have taken a paid session with the atrologer',
-                                                style: Get.textTheme.bodyMedium,
-                                              ).tr(),
+                                                style:  TextStyle(color: Colors.white),),
                                               Center(
                                                 child: SizedBox(
                                                   width: 80,
@@ -1837,7 +1302,7 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                                       backgroundColor:
                                                           MaterialStateProperty
                                                               .all(Get.theme
-                                                                  .primaryColor),
+                                                                  .primaryColorLight),
                                                       foregroundColor:
                                                           MaterialStateProperty
                                                               .all(

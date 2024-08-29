@@ -919,7 +919,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                 Locale('mr', 'IN'), //marathi
                 Locale('ta', 'IN'),
               ],
-              title: 'Astroway CustomerApp',
+              title: 'AstroGuru',
               initialRoute: "SplashScreen",
               home: SplashScreen(),
             );

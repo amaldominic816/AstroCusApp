@@ -18,7 +18,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
-      backgroundColor: bgColor,
+      backgroundColor: Color(0xFF7B3F7A),
       leading: InkWell(
         onTap: () {
           if(flagforCategory==1)

@@ -114,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
           toolbarHeight:
               kIsWeb ? MediaQuery.of(context).size.height * 0.16 : null,
           elevation: 0,
-          backgroundColor: Get.theme.primaryColor,
+          backgroundColor:  Color(0xFF7B3F7A),
           title: Text(
             '${global.getSystemFlagValueForLogin(global.systemFlagNameList.appName)}',
             style: TextStyle(
