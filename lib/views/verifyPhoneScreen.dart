@@ -36,10 +36,16 @@ class VerifyPhoneScreen extends StatelessWidget {
         )
             : AppBar(
           elevation: 1,
-          backgroundColor: Color.fromARGB(255, 245, 235, 235),
+          backgroundColor:  Get.theme.primaryColor,
           title: Text(
-            'Verify Phone',
-            style: Get.textTheme.titleMedium,
+            'Verification',
+            style:TextStyle(
+              fontFamily: 'Marcellus',
+              color: Colors.white,
+                fontSize: 30,
+
+            )
+
           ).tr(),
           leading: IconButton(
               onPressed: () {
@@ -55,7 +61,7 @@ class VerifyPhoneScreen extends StatelessWidget {
                 color: Colors.black,
               )),
         ),
-        backgroundColor: Color.fromARGB(255, 245, 235, 235),
+        backgroundColor:  Get.theme.primaryColor,
         body: Center(
           child: SizedBox(
             width: Get.width - Get.width * 0.1,
@@ -162,9 +168,9 @@ class VerifyPhoneScreen extends StatelessWidget {
                         ),
                         padding: MaterialStateProperty.all(EdgeInsets.all(12)),
                         backgroundColor:
-                        MaterialStateProperty.all(Get.theme.primaryColor),
+                        MaterialStateProperty.all(Get.theme.primaryColorLight),
                         textStyle: MaterialStateProperty.all(
-                            TextStyle(fontSize: 18, color: Colors.black)),
+                            TextStyle(fontSize: 18, color: Colors.white)),
                       ),
                     );
                   }
@@ -210,6 +216,7 @@ class VerifyPhoneScreen extends StatelessWidget {
                               MainAxisAlignment.spaceBetween,
                               children: [
                                 ElevatedButton(
+
                                   onPressed: () {
                                     loginController.maxSecond = 60;
                                     // loginController.second = 0;
@@ -220,18 +227,23 @@ class VerifyPhoneScreen extends StatelessWidget {
                                     global.showOnlyLoaderDialog(context);
                                     loginController.startHeadlessWithWhatsapp('phone');
                                   },
-                                  child: Text(
-                                    'Resend OTP on SMS',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500),
-                                  ).tr(),
+                                  child: Center(
+                                    child: Text(
+                                      'Resend OTP on SMS',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500),
+                                    ).tr(),
+                                  ),
                                   style: ButtonStyle(
                                     shape: MaterialStateProperty.all(
+
                                       RoundedRectangleBorder(
                                         borderRadius:
                                         BorderRadius.circular(10),
+
                                       ),
+
                                     ),
                                     padding: MaterialStateProperty.all(
                                         EdgeInsets.only(
